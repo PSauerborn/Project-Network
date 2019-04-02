@@ -27,7 +27,14 @@ PathDispatcher.py
 -----------------
 file containing the code for the RESTful WSGI interface used to accept HTTP requests
 
+Client.py
+---------
+file containing code for client GUI. Note that this is not needed to make a request to the server; any method for generating a HTTP 
+request to the server works.
+
 Gutzwiller
 ----------
 this folder contains all the code that is used to solve the Bose Hubbard model via the Gutzwiller approach. See other repositories for 
 details on how it works
+
+
