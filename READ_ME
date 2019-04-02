@@ -1,0 +1,33 @@
+The code in this repository is used to construct a Network of Servers that is used to split the numerical work associated with solving 
+the Bose Hubbard model (Quantum Field Theory) over a series of computers over a local network. One overarching Administrator Server
+is constructed, which must run first. Every computer connected to the local network can then run one of the sub-servers, which contact
+the Admin Server and register themselves with it. The Admin server then creates a proxied socket, which it returns to the sub-server it 
+just registerd. This is the point of communciation between Admin Server and Sub-server.
+
+The Admin Server is coupled to a PathDispatcher object, which is a simple RESTful WSGI interface that accepts and processes incoming HTTP 
+requests, which are passed on to the Admin Server. The Admin Server then processes the request and sends out a Remote Procedure Call to all
+the sub-servers registerd with it via the proxied sockets, assigning a section of parameter space to each sub-server. 
+
+The Sub-servers then proceed to evaluate the section of parameter space allocated to them and return the evaluated data to the Admin Server,
+which in turn returns it to the client
+
+Files
+-----
+
+Administrator.py
+----------------
+file containing the code for the Admin Server, as well as a series of helper classes. Must be run first, before any sub servers are
+generated
+
+Server.py
+---------
+file containing code for the sub-servers. Should only be run if the Admin Server is already up and running
+
+PathDispatcher.py
+-----------------
+file containing the code for the RESTful WSGI interface used to accept HTTP requests
+
+Gutzwiller
+----------
+this folder contains all the code that is used to solve the Bose Hubbard model via the Gutzwiller approach. See other repositories for 
+details on how it works
